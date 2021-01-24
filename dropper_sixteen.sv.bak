@@ -1,0 +1,229 @@
+module dropper_sixteen(input Reset, frame_clk, 
+						 output [9:0] drop16X, drop16Y,
+						 output [1599:0] arrow15);
+	logic [9:0] arrow_X_Pos, arrow_Y_Pos, arrow_Y_Motion;
+	 logic [11:0] counter;
+    parameter [9:0] X_start=160;  // Center position on the X axis
+    parameter [9:0] Y_start=100;  // Center position on the Y axis
+    parameter [9:0] Y_Max=400;     // Bottommost point on the Y axis
+	 logic finish_on;
+	 always_ff @ (posedge Reset or posedge frame_clk )
+    begin: Move_arrow
+        if (Reset)  // Asynchronous Reset
+        begin 
+            arrow_Y_Motion <= 10'd0; //Ball_Y_Step;
+				arrow_Y_Pos <= Y_start;
+				arrow_X_Pos <= X_start;
+				counter = 0;
+				finish_on <= 1'b0;
+        end
+           
+        else if(counter >= 1140)
+        begin 
+				arrow_Y_Motion <= 1;
+				
+				 if ( (arrow_Y_Pos + 40) >= Y_Max )  // Ball is at the bottom edge, BOUNCE!
+				 begin
+					  finish_on <= 1'b1;
+					  end
+				 else
+				 begin
+					  arrow_Y_Pos <= (arrow_Y_Pos + arrow_Y_Motion);  // Update arrow position
+					  counter = counter + 1;
+					  finish_on <= 1'b0;
+					  end
+			
+		end
+			else
+			begin
+			counter = counter + 1;
+			finish_on <= 1'b0;
+			end
+    end
+    assign drop16X = arrow_X_Pos;
+   
+    assign drop16Y = arrow_Y_Pos;
+	 always_comb
+	 begin
+	 arrow15 <= 1'b0;
+	 if(finish_on == 0)
+	 begin
+	 arrow15[420] <= 1'b1;
+arrow15[421] <= 1'b1;
+arrow15[460] <= 1'b1;
+arrow15[461] <= 1'b1;
+arrow15[500] <= 1'b1;
+arrow15[501] <= 1'b1;
+arrow15[502] <= 1'b1;
+arrow15[503] <= 1'b1;
+arrow15[540] <= 1'b1;
+arrow15[541] <= 1'b1;
+arrow15[542] <= 1'b1;
+arrow15[543] <= 1'b1;
+arrow15[580] <= 1'b1;
+arrow15[581] <= 1'b1;
+arrow15[582] <= 1'b1;
+arrow15[583] <= 1'b1;
+arrow15[584] <= 1'b1;
+arrow15[585] <= 1'b1;
+arrow15[620] <= 1'b1;
+arrow15[621] <= 1'b1;
+arrow15[622] <= 1'b1;
+arrow15[623] <= 1'b1;
+arrow15[624] <= 1'b1;
+arrow15[625] <= 1'b1;
+arrow15[648] <= 1'b1;
+arrow15[649] <= 1'b1;
+arrow15[650] <= 1'b1;
+arrow15[651] <= 1'b1;
+arrow15[652] <= 1'b1;
+arrow15[653] <= 1'b1;
+arrow15[654] <= 1'b1;
+arrow15[655] <= 1'b1;
+arrow15[656] <= 1'b1;
+arrow15[657] <= 1'b1;
+arrow15[658] <= 1'b1;
+arrow15[659] <= 1'b1;
+arrow15[660] <= 1'b1;
+arrow15[661] <= 1'b1;
+arrow15[662] <= 1'b1;
+arrow15[663] <= 1'b1;
+arrow15[664] <= 1'b1;
+arrow15[665] <= 1'b1;
+arrow15[666] <= 1'b1;
+arrow15[667] <= 1'b1;
+arrow15[688] <= 1'b1;
+arrow15[689] <= 1'b1;
+arrow15[690] <= 1'b1;
+arrow15[691] <= 1'b1;
+arrow15[692] <= 1'b1;
+arrow15[693] <= 1'b1;
+arrow15[694] <= 1'b1;
+arrow15[695] <= 1'b1;
+arrow15[696] <= 1'b1;
+arrow15[697] <= 1'b1;
+arrow15[698] <= 1'b1;
+arrow15[699] <= 1'b1;
+arrow15[700] <= 1'b1;
+arrow15[701] <= 1'b1;
+arrow15[702] <= 1'b1;
+arrow15[703] <= 1'b1;
+arrow15[704] <= 1'b1;
+arrow15[705] <= 1'b1;
+arrow15[706] <= 1'b1;
+arrow15[707] <= 1'b1;
+arrow15[728] <= 1'b1;
+arrow15[729] <= 1'b1;
+arrow15[730] <= 1'b1;
+arrow15[731] <= 1'b1;
+arrow15[732] <= 1'b1;
+arrow15[733] <= 1'b1;
+arrow15[734] <= 1'b1;
+arrow15[735] <= 1'b1;
+arrow15[736] <= 1'b1;
+arrow15[737] <= 1'b1;
+arrow15[738] <= 1'b1;
+arrow15[739] <= 1'b1;
+arrow15[740] <= 1'b1;
+arrow15[741] <= 1'b1;
+arrow15[742] <= 1'b1;
+arrow15[743] <= 1'b1;
+arrow15[744] <= 1'b1;
+arrow15[745] <= 1'b1;
+arrow15[746] <= 1'b1;
+arrow15[747] <= 1'b1;
+arrow15[748] <= 1'b1;
+arrow15[749] <= 1'b1;
+arrow15[768] <= 1'b1;
+arrow15[769] <= 1'b1;
+arrow15[770] <= 1'b1;
+arrow15[771] <= 1'b1;
+arrow15[772] <= 1'b1;
+arrow15[773] <= 1'b1;
+arrow15[774] <= 1'b1;
+arrow15[775] <= 1'b1;
+arrow15[776] <= 1'b1;
+arrow15[777] <= 1'b1;
+arrow15[778] <= 1'b1;
+arrow15[779] <= 1'b1;
+arrow15[780] <= 1'b1;
+arrow15[781] <= 1'b1;
+arrow15[782] <= 1'b1;
+arrow15[783] <= 1'b1;
+arrow15[784] <= 1'b1;
+arrow15[785] <= 1'b1;
+arrow15[786] <= 1'b1;
+arrow15[787] <= 1'b1;
+arrow15[788] <= 1'b1;
+arrow15[789] <= 1'b1;
+arrow15[808] <= 1'b1;
+arrow15[809] <= 1'b1;
+arrow15[810] <= 1'b1;
+arrow15[811] <= 1'b1;
+arrow15[812] <= 1'b1;
+arrow15[813] <= 1'b1;
+arrow15[814] <= 1'b1;
+arrow15[815] <= 1'b1;
+arrow15[816] <= 1'b1;
+arrow15[817] <= 1'b1;
+arrow15[818] <= 1'b1;
+arrow15[819] <= 1'b1;
+arrow15[820] <= 1'b1;
+arrow15[821] <= 1'b1;
+arrow15[822] <= 1'b1;
+arrow15[823] <= 1'b1;
+arrow15[824] <= 1'b1;
+arrow15[825] <= 1'b1;
+arrow15[826] <= 1'b1;
+arrow15[827] <= 1'b1;
+arrow15[848] <= 1'b1;
+arrow15[849] <= 1'b1;
+arrow15[850] <= 1'b1;
+arrow15[851] <= 1'b1;
+arrow15[852] <= 1'b1;
+arrow15[853] <= 1'b1;
+arrow15[854] <= 1'b1;
+arrow15[855] <= 1'b1;
+arrow15[856] <= 1'b1;
+arrow15[857] <= 1'b1;
+arrow15[858] <= 1'b1;
+arrow15[859] <= 1'b1;
+arrow15[860] <= 1'b1;
+arrow15[861] <= 1'b1;
+arrow15[862] <= 1'b1;
+arrow15[863] <= 1'b1;
+arrow15[864] <= 1'b1;
+arrow15[865] <= 1'b1;
+arrow15[866] <= 1'b1;
+arrow15[867] <= 1'b1;
+arrow15[900] <= 1'b1;
+arrow15[901] <= 1'b1;
+arrow15[902] <= 1'b1;
+arrow15[903] <= 1'b1;
+arrow15[904] <= 1'b1;
+arrow15[905] <= 1'b1;
+arrow15[940] <= 1'b1;
+arrow15[941] <= 1'b1;
+arrow15[942] <= 1'b1;
+arrow15[943] <= 1'b1;
+arrow15[944] <= 1'b1;
+arrow15[945] <= 1'b1;
+arrow15[980] <= 1'b1;
+arrow15[981] <= 1'b1;
+arrow15[982] <= 1'b1;
+arrow15[983] <= 1'b1;
+arrow15[1020] <= 1'b1;
+arrow15[1021] <= 1'b1;
+arrow15[1022] <= 1'b1;
+arrow15[1023] <= 1'b1;
+arrow15[1060] <= 1'b1;
+arrow15[1061] <= 1'b1;
+arrow15[1100] <= 1'b1;
+arrow15[1101] <= 1'b1;
+
+
+	 end
+   else
+		 arrow15 <= 1'b0;
+end
+endmodule

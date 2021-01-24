@@ -1,0 +1,232 @@
+module dropper_thirteen(input Reset, frame_clk, 
+						 output [9:0] drop1X, drop1Y,
+						 output [1599:0] arrow1);
+	logic [9:0] arrow_X_Pos, arrow_Y_Pos, arrow_Y_Motion;
+	logic [11:0] counter;
+	 
+    parameter [9:0] X_start=40;  // Center position on the X axis
+    parameter [9:0] Y_start=100;  // Center position on the Y axis
+    parameter [9:0] Y_Max=400;     // Bottommost point on the Y axis
+	 logic finish_on;
+	 
+	 always_ff @ (posedge Reset or posedge frame_clk )
+    begin: Move_arrow
+        if (Reset)  // Asynchronous Reset
+        begin 
+            arrow_Y_Motion <= 10'd0; //Ball_Y_Step;
+				arrow_Y_Pos <= Y_start;
+				arrow_X_Pos <= X_start;
+				counter = 0;
+				finish_on <= 1'b0;
+        end
+           
+        else if(counter >= 100)
+        begin 
+				arrow_Y_Motion <= 1;
+				
+				 if ( (arrow_Y_Pos + 40) >= Y_Max )  // Ball is at the bottom edge, BOUNCE!
+				 begin
+					  finish_on <= 1'b1; 
+				 end
+				 else
+				 begin
+					  arrow_Y_Pos <= (arrow_Y_Pos + arrow_Y_Motion);  // Update arrow position
+					  counter = counter +1;
+					  finish_on <= 1'b0;
+				end
+			
+		end  
+		else
+		begin
+		counter = counter+1;
+		finish_on <= 1'b0;
+		end
+    end
+    assign drop1X = arrow_X_Pos;
+   
+    assign drop1Y = arrow_Y_Pos;
+	 always_comb
+	 begin
+	 arrow1 <= 1'b0;
+	 if(finish_on == 0)
+	 begin
+		arrow1[418] <= 1'b1;
+		arrow1[419] <= 1'b1;
+		arrow1[458] <= 1'b1;
+		arrow1[459] <= 1'b1;
+		arrow1[496] <= 1'b1;
+		arrow1[497] <= 1'b1;
+		arrow1[498] <= 1'b1;
+		arrow1[499] <= 1'b1;
+		arrow1[536] <= 1'b1;
+		arrow1[537] <= 1'b1;
+		arrow1[538] <= 1'b1;
+		arrow1[539] <= 1'b1;
+		arrow1[574] <= 1'b1;
+		arrow1[575] <= 1'b1;
+		arrow1[576] <= 1'b1;
+		arrow1[577] <= 1'b1;
+		arrow1[578] <= 1'b1;
+		arrow1[579] <= 1'b1;
+		arrow1[614] <= 1'b1;
+		arrow1[615] <= 1'b1;
+		arrow1[616] <= 1'b1;
+		arrow1[617] <= 1'b1;
+		arrow1[618] <= 1'b1;
+		arrow1[619] <= 1'b1;
+		arrow1[652] <= 1'b1;
+		arrow1[653] <= 1'b1;
+		arrow1[654] <= 1'b1;
+		arrow1[655] <= 1'b1;
+		arrow1[656] <= 1'b1;
+		arrow1[657] <= 1'b1;
+		arrow1[658] <= 1'b1;
+		arrow1[659] <= 1'b1;
+		arrow1[660] <= 1'b1;
+		arrow1[661] <= 1'b1;
+		arrow1[662] <= 1'b1;
+		arrow1[663] <= 1'b1;
+		arrow1[664] <= 1'b1;
+		arrow1[665] <= 1'b1;
+		arrow1[666] <= 1'b1;
+		arrow1[667] <= 1'b1;
+		arrow1[668] <= 1'b1;
+		arrow1[669] <= 1'b1;
+		arrow1[670] <= 1'b1;
+		arrow1[671] <= 1'b1;
+		arrow1[692] <= 1'b1;
+		arrow1[693] <= 1'b1;
+		arrow1[694] <= 1'b1;
+		arrow1[695] <= 1'b1;
+		arrow1[696] <= 1'b1;
+		arrow1[697] <= 1'b1;
+		arrow1[698] <= 1'b1;
+		arrow1[699] <= 1'b1;
+		arrow1[700] <= 1'b1;
+		arrow1[701] <= 1'b1;
+		arrow1[702] <= 1'b1;
+		arrow1[703] <= 1'b1;
+		arrow1[704] <= 1'b1;
+		arrow1[705] <= 1'b1;
+		arrow1[706] <= 1'b1;
+		arrow1[707] <= 1'b1;
+		arrow1[708] <= 1'b1;
+		arrow1[709] <= 1'b1;
+		arrow1[710] <= 1'b1;
+		arrow1[711] <= 1'b1;
+		arrow1[730] <= 1'b1;
+		arrow1[731] <= 1'b1;
+		arrow1[732] <= 1'b1;
+		arrow1[733] <= 1'b1;
+		arrow1[734] <= 1'b1;
+		arrow1[735] <= 1'b1;
+		arrow1[736] <= 1'b1;
+		arrow1[737] <= 1'b1;
+		arrow1[738] <= 1'b1;
+		arrow1[739] <= 1'b1;
+		arrow1[740] <= 1'b1;
+		arrow1[741] <= 1'b1;
+		arrow1[742] <= 1'b1;
+		arrow1[743] <= 1'b1;
+		arrow1[744] <= 1'b1;
+		arrow1[745] <= 1'b1;
+		arrow1[746] <= 1'b1;
+		arrow1[747] <= 1'b1;
+		arrow1[748] <= 1'b1;
+		arrow1[749] <= 1'b1;
+		arrow1[750] <= 1'b1;
+		arrow1[751] <= 1'b1;
+		arrow1[770] <= 1'b1;
+		arrow1[771] <= 1'b1;
+		arrow1[772] <= 1'b1;
+		arrow1[773] <= 1'b1;
+		arrow1[774] <= 1'b1;
+		arrow1[775] <= 1'b1;
+		arrow1[776] <= 1'b1;
+		arrow1[777] <= 1'b1;
+		arrow1[778] <= 1'b1;
+		arrow1[779] <= 1'b1;
+		arrow1[780] <= 1'b1;
+		arrow1[781] <= 1'b1;
+		arrow1[782] <= 1'b1;
+		arrow1[783] <= 1'b1;
+		arrow1[784] <= 1'b1;
+		arrow1[785] <= 1'b1;
+		arrow1[786] <= 1'b1;
+		arrow1[787] <= 1'b1;
+		arrow1[788] <= 1'b1;
+		arrow1[789] <= 1'b1;
+		arrow1[790] <= 1'b1;
+		arrow1[791] <= 1'b1;
+		arrow1[812] <= 1'b1;
+		arrow1[813] <= 1'b1;
+		arrow1[814] <= 1'b1;
+		arrow1[815] <= 1'b1;
+		arrow1[816] <= 1'b1;
+		arrow1[817] <= 1'b1;
+		arrow1[818] <= 1'b1;
+		arrow1[819] <= 1'b1;
+		arrow1[820] <= 1'b1;
+		arrow1[821] <= 1'b1;
+		arrow1[822] <= 1'b1;
+		arrow1[823] <= 1'b1;
+		arrow1[824] <= 1'b1;
+		arrow1[825] <= 1'b1;
+		arrow1[826] <= 1'b1;
+		arrow1[827] <= 1'b1;
+		arrow1[828] <= 1'b1;
+		arrow1[829] <= 1'b1;
+		arrow1[830] <= 1'b1;
+		arrow1[831] <= 1'b1;
+		arrow1[852] <= 1'b1;
+		arrow1[853] <= 1'b1;
+		arrow1[854] <= 1'b1;
+		arrow1[855] <= 1'b1;
+		arrow1[856] <= 1'b1;
+		arrow1[857] <= 1'b1;
+		arrow1[858] <= 1'b1;
+		arrow1[859] <= 1'b1;
+		arrow1[860] <= 1'b1;
+		arrow1[861] <= 1'b1;
+		arrow1[862] <= 1'b1;
+		arrow1[863] <= 1'b1;
+		arrow1[864] <= 1'b1;
+		arrow1[865] <= 1'b1;
+		arrow1[866] <= 1'b1;
+		arrow1[867] <= 1'b1;
+		arrow1[868] <= 1'b1;
+		arrow1[869] <= 1'b1;
+		arrow1[870] <= 1'b1;
+		arrow1[871] <= 1'b1;
+		arrow1[894] <= 1'b1;
+		arrow1[895] <= 1'b1;
+		arrow1[896] <= 1'b1;
+		arrow1[897] <= 1'b1;
+		arrow1[898] <= 1'b1;
+		arrow1[899] <= 1'b1;
+		arrow1[934] <= 1'b1;
+		arrow1[935] <= 1'b1;
+		arrow1[936] <= 1'b1;
+		arrow1[937] <= 1'b1;
+		arrow1[938] <= 1'b1;
+		arrow1[939] <= 1'b1;
+		arrow1[976] <= 1'b1;
+		arrow1[977] <= 1'b1;
+		arrow1[978] <= 1'b1;
+		arrow1[979] <= 1'b1;
+		arrow1[1016] <= 1'b1;
+		arrow1[1017] <= 1'b1;
+		arrow1[1018] <= 1'b1;
+		arrow1[1019] <= 1'b1;
+		arrow1[1058] <= 1'b1;
+		arrow1[1059] <= 1'b1;
+		arrow1[1098] <= 1'b1;
+		arrow1[1099] <= 1'b1;
+
+	 end
+	 else
+		 arrow1 <= 1'b0;
+
+	 end
+   
+endmodule
